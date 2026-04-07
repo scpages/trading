@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e  # Exit on error
 
 echo "🚀 Starting trading data download and HTML generation..."
 echo ""
@@ -6,13 +7,22 @@ echo ""
 # Download trading data from UEX API
 echo "📥 Downloading trading data from UEX API..."
 
-curl -s "https://api.uexcorp.space/2.0/commodities_prices_all" > prices.json
+if ! curl -f -s "https://api.uexcorp.space/2.0/commodities_prices_all" > prices.json; then
+    echo "  ❌ Failed to download prices.json"
+    exit 1
+fi
 echo "  ✓ prices.json"
 
-curl -s "https://api.uexcorp.space/2.0/star_systems" > systems.json
+if ! curl -f -s "https://api.uexcorp.space/2.0/star_systems" > systems.json; then
+    echo "  ❌ Failed to download systems.json"
+    exit 1
+fi
 echo "  ✓ systems.json"
 
-curl -s "https://api.uexcorp.space/2.0/terminals" > terminals.json
+if ! curl -f -s "https://api.uexcorp.space/2.0/terminals" > terminals.json; then
+    echo "  ❌ Failed to download terminals.json"
+    exit 1
+fi
 echo "  ✓ terminals.json"
 
 echo ""
