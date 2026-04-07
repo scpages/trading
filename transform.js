@@ -217,7 +217,7 @@ const profitUecHeader = '<tr><th>Commodity</th><th>Profit aUEC/SCU</th></tr>';
 const profitUecData = profitData.map(item =>
     `<tr><td><a href="#comm-${item.commodity}">${item.commodity}</a></td><td>${readableNumber(item.profit_uec_real)} (up to ${readableNumber(item.profit_uec)})</td></tr>`
 ).join('');
-const profitUecTable = '<table class="best">' + profitUecHeader + profitUecData + '</table> <br> <a style="padding-left: 4rem; padding-top: 1rem; color: #333; " href="https://scpages.github.io/">SCPages</a>';
+const profitUecTable = '<table class="best">' + profitUecHeader + profitUecData + '</table>';
 
 profitData.sort((a, b) => b.profit_perc - a.profit_perc);
 const profitPercHeader = '<tr><th>Commodity</th><th>Profit %</th></tr>';
@@ -244,6 +244,10 @@ ${profitPercTable}
 </div> <div id="main">
 ${tables}
 </div></div>
+<footer>
+    <p>Data sourced from <a href="https://uexcorp.space/" target="_blank">UEX Corp</a> API | Auto-updates every 15 minutes</p>
+    <p><a href="https://scpages.github.io/">SCPages</a> | <a href="https://github.com/scpages/trading" target="_blank">GitHub</a></p>
+</footer>
     </body>
 </html>
 `;
@@ -340,6 +344,33 @@ div#panel_l
 :target tbody tr th {
     background-color: goldenrod;
 }
+
+footer
+    {
+    clear: both;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    color: #888;
+    font-size: 0.9rem;
+    border-top: 1px solid #333;
+    }
+
+footer p
+    {
+    margin: 0.5rem 0;
+    }
+
+footer a
+    {
+    color: #006fdd;
+    text-decoration: none;
+    }
+
+footer a:hover
+    {
+    text-decoration: underline;
+    }
 `;
 
 fs.writeFileSync('default.css', css);
