@@ -3,12 +3,47 @@ const fs = require('fs');
 console.log('📊 Processing trading data...');
 
 // Load JSON files
-const pricesData = JSON.parse(fs.readFileSync('prices.json', 'utf8'));
-const systemsData = JSON.parse(fs.readFileSync('systems.json', 'utf8'));
-const terminalsData = JSON.parse(fs.readFileSync('terminals.json', 'utf8'));
+let pricesData, systemsData, terminalsData;
 
-// Process data
-console.log('  ✓ Data files loaded');
+try {
+    if (!fs.existsSync('prices.json')) {
+        console.error('❌ prices.json not found!');
+        process.exit(1);
+    }
+    if (!fs.existsSync('systems.json')) {
+        console.error('❌ systems.json not found!');
+        process.exit(1);
+    }
+    if (!fs.existsSync('terminals.json')) {
+        console.error('❌ terminals.json not found!');
+        process.exit(1);
+    }
+
+    pricesData = JSON.parse(fs.readFileSync('prices.json', 'utf8'));
+    systemsData = JSON.parse(fs.readFileSync('systems.json', 'utf8'));
+    terminalsData = JSON.parse(fs.readFileSync('terminals.json', 'utf8'));
+
+    console.log('  ✓ Data files loaded');
+
+    // Validate data structure
+    if (!pricesData.data || !Array.isArray(pricesData.data)) {
+        console.error('❌ prices.json has invalid structure');
+        process.exit(1);
+    }
+    if (!systemsData.data || !Array.isArray(systemsData.data)) {
+        console.error('❌ systems.json has invalid structure');
+        process.exit(1);
+    }
+    if (!terminalsData.data || !Array.isArray(terminalsData.data)) {
+        console.error('❌ terminals.json has invalid structure');
+        process.exit(1);
+    }
+
+    console.log('  ✓ Data structure validated');
+} catch (error) {
+    console.error('❌ Error loading data files:', error.message);
+    process.exit(1);
+}
 
 // Convert numbers to proper types
 pricesData.data.forEach(item => {
