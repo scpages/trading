@@ -1,34 +1,17 @@
-# Star Citizen Trading Data Generator
+# Cargo Trading
 
-This repository contains scripts to fetch and process Star Citizen trading data from the UEX Corp API and generate a static HTML page.
+Fetches commodity price data from the [UEX Corp API](https://uexcorp.space) and generates a static HTML page with trading routes and profit calculations.
 
-## Usage
+Live at: **https://scpages.github.io/trading/**
+
+## Workflow
 
 ```bash
-chmod +x main.sh
-./main.sh
+bash main.sh
 ```
 
-This will:
-1. Download trading data from UEX Corp API (prices, systems, terminals)
-2. Process the data and generate an HTML page with trading routes and profit calculations
-3. Output `index.html` and `default.css`
+Fetches fresh data from the UEX Corp API (prices, systems, terminals), processes it, and generates `index.html`.
 
-## Requirements
+## Data Sources
 
-- Node.js (v18+)
-- curl
-
-## Data Source
-
-Data is sourced from [UEX Corp](https://uexcorp.space/) API.
-
-## Generated Files
-
-- `index.html` - Trading data visualization
-- `default.css` - Stylesheet
-- `prices.json`, `systems.json`, `terminals.json` - Raw data (temporary)
-
-## License
-
-See LICENSE file.
+- [UEX Corp API](https://api.uexcorp.space/2.0/) — commodity prices, star systems, terminals
